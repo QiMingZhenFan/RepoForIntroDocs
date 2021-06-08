@@ -28,7 +28,8 @@ def main():
     actor_list = []
 
     try:
-        client = carla.Client('localhost', 2000)
+        # client = carla.Client('localhost', 2000)
+        client = carla.Client('10.214.143.211', 2000)
         client.set_timeout(2.0)
 
         world = client.get_world()
@@ -41,8 +42,15 @@ def main():
             color = random.choice(bp.get_attribute('color').recommended_values)
             bp.set_attribute('color', color)
 
-        transform = random.choice(world.get_map().get_spawn_points())
+        # transform = random.choice(world.get_map().get_spawn_points())
 
+        transform = carla.Transform()
+        transform.location.x = 1110.7
+        transform.location.y = -93.1
+        transform.location.z = 10
+        transform.rotation.pitch = 0.0
+        transform.rotation.yaw = 25.0
+        transform.rotation.roll = 0.0
         vehicle = world.spawn_actor(bp, transform)
 
         actor_list.append(vehicle)
